@@ -1,0 +1,24 @@
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+name: 'Action JS Template'
+description: 'A simple javascript template for rapid development of GitHub actions.'
+author: 'xrkffgg'
+
+branding:
+  # https://feathericons.com/
+  # e.g. https://haya14busa.github.io/github-action-brandings/
+  icon: 'file'
+  color: 'blue'
+
+inputs:
+  GITHUB_TOKEN:
+    description: Secret GitHub API token to use for making API requests.
+    default: ${{ github.token }}
+    required: true
+
+#outputs:
+#  result:
+#    description: action result
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
