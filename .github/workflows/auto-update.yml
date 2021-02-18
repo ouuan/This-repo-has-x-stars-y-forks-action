@@ -17,4 +17,4 @@ jobs:
       - name: Update
         run: node ./src/main.js
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
