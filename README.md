@@ -1,26 +1,28 @@
-# This repo has x stars y forks
+# 💖 This repo has x stars y forks
 
-## 如何触发？
+English | [简体中文](./README.zh-CN.md)
 
-这里使用了 3 种触发方式
+## How to trigger?
 
-1. push main 分支触发
-2. fork 触发
-3. 定时 10 分钟触发，由于 GitHub Actions对定时触发方式有限制，不建议更小
+3 trigger methods are used here
 
-## 如何在自己项目使用？
+1. push main branch trigger
+2. fork trigger
+3. It is triggered at a time of 10 minutes. Since GitHub Actions has restrictions on the timing of the trigger, it is not recommended to be smaller
 
-1. Fork 到自己项目中
-2. 打开自己项目的 Actions，有时候默认 fork 的项目，GitHub 会默认关闭 Actions
-3. 申请个人 token，https://github.com/settings/tokens
-4. 勾选如下图
+## How to use it in your own project?
+
+1. Fork into your own project
+2. Open your own project’s Actions. For projects you fork by default, GitHub will close Actions by default
+3. Apply for personal token, https://github.com/settings/tokens
+4. Check the following figure
 ![](./token.png)
-5. 修改 `.github/workflows/auto-update.yml` 中的 `GH_TOKEN`，将这个名称同新建的名称保持一致。
-6. 将新建的 token 保存到自己项目的 Secrets 中。注意 token 保存好
+5. Save the newly created token to the Setting/Secrets of your project. Note that the token is saved
 ![](./secrets.png)
-7. Actions 会自动运行，更新当前项目的名称
+1. Modify `GH_TOKEN` in `.github/workflows/auto-update.yml` to keep this name consistent with the newly add
+2. Actions will run automatically and update the name of the current project
 
-## 创意来自
+## Inspired by
 
 - https://github.com/RealPeha
 

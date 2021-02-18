@@ -16,14 +16,22 @@ async function run() {
       repo,
     });
 
+    const oldArr = repo.split('-');
+    const oldStarts = oldArr[3];
+    const oldForks = oldArr[5];
+
     const stars = data.stargazers_count;
     const forks = data.forks_count;
+    console.log(`Info: [oldStarts: ${oldStarts}] [oldForks: ${oldForks}] [stars: ${stars}] [forks: ${forks}]`);
 
-    await octokit.repos.update({
-      owner,
-      repo,
-      name: `This-repo-has-${stars}-stars-${forks}-forks`,
-    });
+    // No change no update
+    if (oldStarts !== stars || oldForks !== forks) {
+      await octokit.repos.update({
+        owner,
+        repo,
+        name: `This-repo-has-${stars}-stars-${forks}-forks`,
+      });
+    }
   } catch (error) {
     console.log(error.message);
   }
