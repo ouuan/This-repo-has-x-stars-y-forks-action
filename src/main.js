@@ -1,17 +1,29 @@
-const core = require('@actions/core');
+require('dotenv').config();
+const github = require('@actions/github');
+const { Octokit } = require('@octokit/rest');
 
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.debug(`Waiting ${ms} milliseconds ...`); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const { token } = process.env;
+    const octokit = new Octokit({ auth: `token ${token}` });
+    const context = github.context;
 
-    core.debug(new Date().toTimeString());
-    await new Promise(resolve => {
-      setTimeout(() => resolve('done!'), 10);
+    const owner = context.repo.owner;
+    const repo = context.repo.repo;
+
+    const { data: repo } = await octokit.repos.get({
+      owner,
+      repo,
     });
-    core.debug(new Date().toTimeString());
 
-    core.setOutput('time', new Date().toTimeString());
+    const stars = repo.stargazers_count;
+    const forks = repo.forks_count;
+
+    await octokit.repos.update({
+      owner,
+      repo,
+      name: `This-repo-has-${stars}-stars-${forks}-forks`,
+    });
   } catch (error) {
     core.setFailed(error.message);
   }
