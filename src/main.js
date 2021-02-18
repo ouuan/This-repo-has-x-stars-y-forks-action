@@ -25,7 +25,7 @@ async function run() {
       name: `This-repo-has-${stars}-stars-${forks}-forks`,
     });
   } catch (error) {
-    core.setFailed(error.message);
+    console.log(error.message);
   }
 }
 
