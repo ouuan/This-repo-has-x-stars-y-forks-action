@@ -11,13 +11,13 @@ async function run() {
     const owner = context.repo.owner;
     const repo = context.repo.repo;
 
-    const { data: repo } = await octokit.repos.get({
+    const { data } = await octokit.repos.get({
       owner,
       repo,
     });
 
-    const stars = repo.stargazers_count;
-    const forks = repo.forks_count;
+    const stars = data.stargazers_count;
+    const forks = data.forks_count;
 
     await octokit.repos.update({
       owner,
