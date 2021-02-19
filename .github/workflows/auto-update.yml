@@ -2,7 +2,6 @@ name: "This repo has x stars y forks"
 
 on:
   push:
-    branches: [master]
   fork:
   watch:
     types: [started]
