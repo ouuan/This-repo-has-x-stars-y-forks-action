@@ -25,13 +25,13 @@ inputs:
       - <forkCount>:         <the number of forks>
       - <name>:              this-repo-has-<stars>-stars-<forks>-forks
       - <description>:       This repo has <stars> stars <forks> forks
-      - <auto>:              <${{ inputs.type }}>
+      - <auto>:              <${ inputs.type }>
       - <name-stars>:        this-repo-has-<stars>-stars
       - <description-stars>: This repo has <stars> stars
-      - <auto-stars>:        <${{ inputs.type }}-stars>
+      - <auto-stars>:        <${ inputs.type }-stars>
       - <name-forks>:        this-repo-has-<forks>-forks
       - <description-forks>: This repo has <forks> forks
-      - <auto-forks>:        <${{ inputs.type }}-forks>
+      - <auto-forks>:        <${ inputs.type }-forks>
     default: <auto>
     required: false
 
