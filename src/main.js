@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 const { Octokit } = require('@octokit/rest');
 
 (async () => {
@@ -7,7 +6,7 @@ const { Octokit } = require('@octokit/rest');
     const token = core.getInput('token', true);
     const octokit = new Octokit({ auth: `token ${token}` });
 
-    const { owner, repo } = github.context.repo;
+    const [owner, repo] = core.getInput('repo', true).split('/');
 
     const { data } = await octokit.repos.get({
       owner,
