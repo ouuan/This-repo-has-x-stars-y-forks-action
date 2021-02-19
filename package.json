@@ -1,12 +1,20 @@
 {
-  "name": "This-repo-has-x-stars-y-forks",
-  "private": true,
+  "name": "this-repo-has-x-stars-y-forks-action",
   "main": "src/main.js",
-  "author": "xrkffgg",
   "license": "MIT",
+  "scripts": {
+    "build": "ncc build",
+    "lint": "eslint src --ext js --fix"
+  },
   "dependencies": {
+    "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "@octokit/rest": "^18.0.14",
-    "dotenv": "^8.2.0"
+    "@octokit/rest": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.27.0",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }

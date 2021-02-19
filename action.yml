@@ -1,0 +1,24 @@
+# https://docs.github.com/actions/creating-actions/metadata-syntax-for-github-actions
+
+name: "This repo has x stars y forks action"
+description: 'Update repository description to "This repo has x stars y forks".'
+author: "Yufan You"
+
+inputs:
+  token:
+    description: |
+      A GitHub Personal Access Token with the public_repo scope.
+      GITHUB_TOKEN is not available because it doesn't have enough permission to update the description of the repo.
+    required: true
+  template:
+    description: |
+      The repository description. You can use the following place holders:
+      - <star>:      x
+      - <fork>:      y
+      - <star-fork>: This repo has x stars y forks
+    default: <star-fork>.
+    required: false
+
+runs:
+  using: "node12"
+  main: "dist/index.js"

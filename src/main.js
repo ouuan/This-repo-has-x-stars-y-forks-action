@@ -1,40 +1,26 @@
-require('dotenv').config();
+const core = require('@actions/core');
 const github = require('@actions/github');
 const { Octokit } = require('@octokit/rest');
 
-async function run() {
-  try {
-    const { token } = process.env;
-    const octokit = new Octokit({ auth: `token ${token}` });
-    const context = github.context;
+(async () => {
+  const token = core.getInput('token') || process.env.GITHUB_TOKEN;
+  const octokit = new Octokit({ auth: `token ${token}` });
 
-    const owner = context.repo.owner;
-    const repo = context.repo.repo;
+  const { owner, repo } = github.context.repo;
 
-    const { data } = await octokit.repos.get({
-      owner,
-      repo,
-    });
+  const { stargazers_count: stars, forks_count: forks } = (await octokit.repos.get({
+    owner,
+    repo,
+  })).data;
 
-    const oldArr = repo.split('-');
-    const oldStarts = oldArr[3];
-    const oldForks = oldArr[5];
+  const descriptionTemplate = core.getInput('template') || '<star-fork>';
+  const description = descriptionTemplate.replace('<star-fork>', `This repo has ${stars} star${stars > 1 ? 's' : ''} ${forks} fork${forks > 1 ? 's' : ''}`)
+    .replace('<star>', stars.toString())
+    .replace('<fork>', forks.toString());
 
-    const stars = data.stargazers_count;
-    const forks = data.forks_count;
-    console.log(`Info: [oldStarts: ${oldStarts}] [oldForks: ${oldForks}] [stars: ${stars}] [forks: ${forks}]`);
-
-    // No change no update
-    if (oldStarts !== stars || oldForks !== forks) {
-      await octokit.repos.update({
-        owner,
-        repo,
-        name: `This-repo-has-${stars}-stars-${forks}-forks`,
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-
-run();
+  await octokit.repos.update({
+    owner,
+    repo,
+    description,
+  });
+})();

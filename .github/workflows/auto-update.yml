@@ -2,19 +2,17 @@ name: Update
 
 on:
   push:
-    branches: main
-  schedule:
-    - cron: '*/10 * * * *'
+    branches: [master]
   fork:
+  watch:
+    types: [started]
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Install
-        run: yarn
       - name: Update
-        run: node ./src/main.js
-        env:
-          token: ${{ secrets.GH_TOKEN }}
+        uses: ouuan/This-repo-has-x-stars-y-forks-action@master
+        with:
+          token: ${{ secrets.TOKEN }}
+          template: "A GitHub Action to update this sentence for your repository: <star-fork>."
