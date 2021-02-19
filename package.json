@@ -5,7 +5,7 @@
   "scripts": {
     "build": "ncc build -m",
     "lint": "eslint src --ext js --fix",
-    "publish": "git switch master && git push && git switch v2 && git merge master && yarn && yarn build && git commit -am 'build: update dist' && git push && git switch master"
+    "publish": "git switch master && git switch v2 && git merge master && yarn && yarn build && git commit -am 'build: update dist' && git push && git switch master && git push"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
