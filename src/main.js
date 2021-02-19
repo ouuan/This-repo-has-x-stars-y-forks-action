@@ -9,10 +9,11 @@ const { Octokit } = require('@octokit/rest');
 
     const { owner, repo } = github.context.repo;
 
-    const { stargazers_count: stars, forks_count: forks } = (await octokit.repos.get({
+    const { data } = await octokit.repos.get({
       owner,
       repo,
-    })).data;
+    });
+    const { stargazers_count: stars, forks_count: forks } = data;
 
     const descriptionTemplate = core.getInput('template') || '<star-fork>';
     const description = descriptionTemplate.replace('<star-fork>', `This repo has ${stars} star${stars > 1 ? 's' : ''} ${forks} fork${forks > 1 ? 's' : ''}`)
