@@ -27,8 +27,8 @@ const { Octokit } = require('@octokit/rest');
 
     const placeHolder = ({ name = false, stars = true, forks = true } = {}) => {
       let content = 'This repo has';
-      if (stars) content += `${starCount} star${starCount > 1 ? 's' : ''}`;
-      if (forks) content += `${forkCount} fork${forkCount > 1 ? 's' : ''}`;
+      if (stars) content += ` ${starCount} star${starCount > 1 ? 's' : ''}`;
+      if (forks) content += ` ${forkCount} fork${forkCount > 1 ? 's' : ''}`;
       if (name) content = content.toLowerCase().replace(' ', '-');
       return content;
     };
