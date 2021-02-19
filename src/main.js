@@ -40,9 +40,9 @@ const { Octokit } = require('@octokit/rest');
       .replace('<name-stars>', placeHolder({ name: true, forks: false }))
       .replace('<description-stars>', placeHolder({ name: false, forks: false }))
       .replace('<auto-stars>', placeHolder({ name: type === 'name', forks: false }))
-      .replace('<name-stars>', placeHolder({ name: true, stars: false }))
-      .replace('<description-stars>', placeHolder({ name: false, stars: false }))
-      .replace('<auto-stars>', placeHolder({ name: type === 'name', stars: false }))
+      .replace('<name-forks>', placeHolder({ name: true, stars: false }))
+      .replace('<description-forks>', placeHolder({ name: false, stars: false }))
+      .replace('<auto-forks>', placeHolder({ name: type === 'name', stars: false }))
       .replace('<starCount>', starCount.toString())
       .replace('<forkCount>', forkCount.toString());
 
