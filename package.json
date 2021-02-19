@@ -6,7 +6,7 @@
   "scripts": {
     "build": "ncc build -m",
     "lint": "eslint src --ext js --fix",
-    "publish:pre": "git switch v2 && git merge master && yarn && yarn build && { git commit -am 'build: update dist' || true }",
+    "publish:pre": "git switch v2 && git merge master && yarn && yarn build && git diff-index --quiet @ || git commit -am 'build: update dist'",
     "publish:after": "git push && git push --tags && git switch master && git cherry-pick v2 && git push",
     "publish:patch": "yarn publish:pre && yarn version --patch && yarn publish:after",
     "publish:minor": "yarn publish:pre && yarn version --minor && yarn publish:after",
