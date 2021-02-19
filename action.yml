@@ -10,6 +10,10 @@ inputs:
       A GitHub Personal Access Token with the public_repo scope.
       GITHUB_TOKEN is not available because it doesn't have enough permission to update the description of the repo.
     required: true
+  repo:
+    description: The repository to update, in the "<owner>/<name>" format.
+    default: ${{ github.repository }}
+    required: false
   template:
     description: |
       The repository description. You can use the following place holders:
@@ -17,6 +21,10 @@ inputs:
       - <fork>:      y
       - <star-fork>: This repo has x stars y forks
     default: <star-fork>.
+    required: false
+  type:
+    description: Which one to update. Either "name" or "description".
+    default: description
     required: false
 
 runs:

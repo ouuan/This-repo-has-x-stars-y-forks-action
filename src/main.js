@@ -4,7 +4,7 @@ const { Octokit } = require('@octokit/rest');
 
 (async () => {
   try {
-    const token = core.getInput('token') || process.env.GITHUB_TOKEN;
+    const token = core.getInput('token', true);
     const octokit = new Octokit({ auth: `token ${token}` });
 
     const { owner, repo } = github.context.repo;
@@ -15,16 +15,21 @@ const { Octokit } = require('@octokit/rest');
     });
     const { stargazers_count: stars, forks_count: forks } = data;
 
-    const descriptionTemplate = core.getInput('template') || '<star-fork>';
-    const description = descriptionTemplate.replace('<star-fork>', `This repo has ${stars} star${stars > 1 ? 's' : ''} ${forks} fork${forks > 1 ? 's' : ''}`)
+    const type = core.getInput('type', true);
+    const availableTypes = ['description', 'name'];
+    if (!availableTypes.includes(type)) core.setFailed(`Wrong type, got ${type}, expected ${availableTypes.join(' | ')}.`);
+
+    const params = {
+      owner,
+      repo,
+    };
+
+    const template = core.getInput('template', true);
+    params[type] = template.replace('<star-fork>', `This repo has ${stars} star${stars > 1 ? 's' : ''} ${forks} fork${forks > 1 ? 's' : ''}`)
       .replace('<star>', stars.toString())
       .replace('<fork>', forks.toString());
 
-    await octokit.repos.update({
-      owner,
-      repo,
-      description,
-    });
+    await octokit.repos.update(params);
   } catch (error) {
     core.setFailed(error);
   }
