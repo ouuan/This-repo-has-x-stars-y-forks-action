@@ -29,7 +29,7 @@ const { Octokit } = require('@octokit/rest');
       let content = 'This repo has';
       if (stars) content += ` ${starCount} star${starCount > 1 ? 's' : ''}`;
       if (forks) content += ` ${forkCount} fork${forkCount > 1 ? 's' : ''}`;
-      if (name) content = content.toLowerCase().replace(' ', '-');
+      if (name) content = content.toLowerCase().replace(/\s/g, '-');
       return content;
     };
 
