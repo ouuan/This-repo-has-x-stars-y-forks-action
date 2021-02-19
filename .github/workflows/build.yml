@@ -13,4 +13,4 @@ jobs:
       - run: yarn
       - run: yarn lint
       - run: yarn build
-      - run: git diff-index --quiet @
+      - run: git diff --exit-code
