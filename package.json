@@ -3,7 +3,7 @@
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
-    "build": "ncc build",
+    "build": "ncc build -m",
     "lint": "eslint src --ext js --fix"
   },
   "dependencies": {
