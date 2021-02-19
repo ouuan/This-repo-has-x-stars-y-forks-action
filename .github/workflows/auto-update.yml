@@ -14,5 +14,5 @@ jobs:
       - name: Update
         uses: ouuan/This-repo-has-x-stars-y-forks-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
           template: "A GitHub Action to update this sentence for your repository: <star-fork>."
