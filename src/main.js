@@ -46,6 +46,8 @@ const { Octokit } = require('@octokit/rest');
       .replace('<starCount>', starCount.toString())
       .replace('<forkCount>', forkCount.toString());
 
+    core.info(JSON.stringify(params));
+
     await octokit.repos.update(params);
   } catch (error) {
     core.setFailed(error);
