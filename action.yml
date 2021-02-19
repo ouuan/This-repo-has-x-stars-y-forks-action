@@ -14,17 +14,25 @@ inputs:
     description: The repository to update, in the "<owner>/<name>" format.
     default: ${{ github.repository }}
     required: false
-  template:
-    description: |
-      The repository description. You can use the following place holders:
-      - <star>:      x
-      - <fork>:      y
-      - <star-fork>: This repo has x stars y forks
-    default: <star-fork>.
-    required: false
   type:
     description: Which one to update. Either "name" or "description".
     default: description
+    required: false
+  template:
+    description: |
+      The repository description. You can use the following place holders:
+      - <starCount>:         <the number of stars>
+      - <forkCount>:         <the number of forks>
+      - <name>:              this-repo-has-<stars>-stars-<forks>-forks
+      - <description>:       This repo has <stars> stars <forks> forks
+      - <auto>:              <${{ inputs.type }}>
+      - <name-stars>:        this-repo-has-<stars>-stars
+      - <description-stars>: This repo has <stars> stars
+      - <auto-stars>:        <${{ inputs.type }}-stars>
+      - <name-forks>:        this-repo-has-<forks>-forks
+      - <description-forks>: This repo has <forks> forks
+      - <auto-forks>:        <${{ inputs.type }}-forks>
+    default: <auto>
     required: false
 
 runs:

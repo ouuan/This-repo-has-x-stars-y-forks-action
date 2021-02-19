@@ -12,7 +12,7 @@ const { Octokit } = require('@octokit/rest');
       owner,
       repo,
     });
-    const { stargazers_count: stars, forks_count: forks } = data;
+    const { stargazers_count: starCount, forks_count: forkCount } = data;
 
     const type = core.getInput('type', true);
     const availableTypes = ['description', 'name'];
@@ -24,9 +24,27 @@ const { Octokit } = require('@octokit/rest');
     };
 
     const template = core.getInput('template', true);
-    params[type] = template.replace('<star-fork>', `This repo has ${stars} star${stars > 1 ? 's' : ''} ${forks} fork${forks > 1 ? 's' : ''}`)
-      .replace('<star>', stars.toString())
-      .replace('<fork>', forks.toString());
+
+    const placeHolder = ({ name = false, stars = true, forks = true } = {}) => {
+      let content = 'This repo has';
+      if (stars) content += `${starCount} star${starCount > 1 ? 's' : ''}`;
+      if (forks) content += `${forkCount} fork${forkCount > 1 ? 's' : ''}`;
+      if (name) content = content.toLowerCase().replace(' ', '-');
+      return content;
+    };
+
+    params[type] = template
+      .replace('<name>', placeHolder({ name: true }))
+      .replace('<description>', placeHolder({ name: false }))
+      .replace('<auto>', placeHolder({ name: type === 'name' }))
+      .replace('<name-stars>', placeHolder({ name: true, forks: false }))
+      .replace('<description-stars>', placeHolder({ name: false, forks: false }))
+      .replace('<auto-stars>', placeHolder({ name: type === 'name', forks: false }))
+      .replace('<name-stars>', placeHolder({ name: true, stars: false }))
+      .replace('<description-stars>', placeHolder({ name: false, stars: false }))
+      .replace('<auto-stars>', placeHolder({ name: type === 'name', stars: false }))
+      .replace('<starCount>', starCount.toString())
+      .replace('<forkCount>', forkCount.toString());
 
     await octokit.repos.update(params);
   } catch (error) {
