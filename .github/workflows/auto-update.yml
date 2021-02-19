@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: This repo has x stars y forks
-        uses: ouuan/This-repo-has-x-stars-y-forks-action@master
+        uses: ouuan/This-repo-has-x-stars-y-forks-action@v1
         with:
           token: ${{ secrets.TOKEN }}
           template: "A GitHub Action to update this sentence for your repository: <star-fork>."
