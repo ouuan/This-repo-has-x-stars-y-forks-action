@@ -1,0 +1,16 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn
+      - run: yarn lint
+      - run: yarn build
+      - run: git diff-index --quiet @
