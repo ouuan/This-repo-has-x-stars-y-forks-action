@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "build": "ncc build -m",
-    "lint": "eslint src --ext js --fix"
+    "lint": "eslint src --ext js --fix",
+    "publish": "git switch master && git push && git switch v1 && git merge master && yarn && yarn build && git commit -am 'build: update dist' && git push"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
