@@ -1,4 +1,4 @@
-name: Update
+name: "This repo has x stars y forks"
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Update
+      - name: This repo has x stars y forks
         uses: ouuan/This-repo-has-x-stars-y-forks-action@master
         with:
           token: ${{ secrets.TOKEN }}
