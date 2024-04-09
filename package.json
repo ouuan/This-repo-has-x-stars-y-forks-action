@@ -6,20 +6,21 @@
   "scripts": {
     "build": "ncc build -m",
     "lint": "eslint src --ext js --fix",
-    "publish:pre": "git switch v2 && git merge master && yarn && yarn build && git diff-index --quiet @ || git commit -am 'build: update dist'",
-    "publish:after": "git push && git push --tags && git switch master && git cherry-pick v2 && git push",
+    "publish:pre": "git switch v3 && git merge master && yarn && yarn build && git diff-index --quiet @ || git commit -am 'build: update dist'",
+    "publish:after": "git push && git push --tags && git switch master && git cherry-pick v3 && git push",
     "publish:patch": "yarn publish:pre && yarn version --patch && yarn publish:after",
     "publish:minor": "yarn publish:pre && yarn version --minor && yarn publish:after",
+    "publish:major": "yarn publish:pre && yarn version --major && yarn publish:after",
     "publish": "yarn publish:patch"
   },
   "dependencies": {
-    "@actions/core": "^1.10.0",
-    "@octokit/rest": "^19.0.5"
+    "@actions/core": "^1.10.1",
+    "@octokit/rest": "^20.1.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.34.0",
+    "@vercel/ncc": "^0.38.1",
     "eslint": "^8.27.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.29.1"
   }
 }
