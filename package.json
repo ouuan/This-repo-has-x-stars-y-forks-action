@@ -2,7 +2,7 @@
   "name": "this-repo-has-x-stars-y-forks-action",
   "main": "src/main.js",
   "license": "MIT",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "scripts": {
     "build": "ncc build -m",
     "lint": "eslint src --ext js --fix",
